@@ -6,6 +6,7 @@ import com.example.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -18,5 +19,10 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrder(Order order) {
         order.setOrderNumber(UUID.randomUUID().toString());
         return orderRepository.save(order);
+    }
+
+    @Override
+    public List<Order> getAllOrder() {
+        return orderRepository.findAll();
     }
 }

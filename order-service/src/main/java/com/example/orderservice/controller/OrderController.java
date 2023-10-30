@@ -4,10 +4,7 @@ import com.example.orderservice.model.Order;
 import com.example.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/order")
@@ -19,5 +16,10 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<?> createOrder(@RequestBody Order order) {
         return ResponseEntity.ok(orderService.createOrder(order));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllOrder() {
+        return ResponseEntity.ok(orderService.getAllOrder());
     }
 }
