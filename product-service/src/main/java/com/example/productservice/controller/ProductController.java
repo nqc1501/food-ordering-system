@@ -1,8 +1,11 @@
 package com.example.productservice.controller;
 
+import com.example.productservice.dto.req.ProductRequest;
 import com.example.productservice.model.Product;
 import com.example.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +22,18 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.createProduct(product));
+    public ResponseEntity<?> createProduct(@RequestBody ProductRequest productRequest) {
+        return ResponseEntity.ok(productService.createProduct(productRequest));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.findProductById(id));
+    }
+
+    @GetMapping("/{keyword}")
+    public ResponseEntity<?> searchProduct() {
+        return ResponseEntity.ok("");
+    }
+
 }
