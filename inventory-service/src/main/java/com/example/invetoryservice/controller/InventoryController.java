@@ -16,7 +16,7 @@ public class InventoryController {
     private final InventoryService inventoryService;
 
     @GetMapping("/id={}")
-    public ResponseEntity<?> isInStock(@PathVariable Long id) {
+    public ResponseEntity<Boolean> isInStock(@PathVariable Long id) {
         return ResponseEntity.ok(inventoryService.isInStock(id));
     }
 }
