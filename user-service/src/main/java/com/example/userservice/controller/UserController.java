@@ -1,7 +1,7 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.model.User;
-import com.example.userservice.service.UserService;
+import com.example.userservice.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

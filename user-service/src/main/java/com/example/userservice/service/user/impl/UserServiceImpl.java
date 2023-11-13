@@ -1,8 +1,8 @@
-package com.example.userservice.service.impl;
+package com.example.userservice.service.user.impl;
 
 import com.example.userservice.model.User;
 import com.example.userservice.repository.UserRepository;
-import com.example.userservice.service.UserService;
+import com.example.userservice.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
