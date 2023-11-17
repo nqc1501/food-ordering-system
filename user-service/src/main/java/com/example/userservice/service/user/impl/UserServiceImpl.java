@@ -35,4 +35,15 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser.orElse(null);
     }
+
+    @Override
+    public void updateUser(User user) {
+        var userDB = userRepository.findByEmail(user.getEmail()).orElseThrow();
+        userDB.setName(user.getName());
+        userDB.setTel(user.getTel());
+        userDB.setAddress(user.getAddress());
+        userDB.setPassword(user.getPassword());
+        userRepository.save(userDB);
+    }
+
 }

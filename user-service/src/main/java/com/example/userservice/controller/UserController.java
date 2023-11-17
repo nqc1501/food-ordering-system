@@ -34,4 +34,11 @@ public class UserController {
             return ResponseEntity.ok(user);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Can't find this user!");
     }
+
+    @PutMapping
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
+        userService.updateUser(user);
+        return ResponseEntity.ok("Update completely!");
+    }
+
 }
