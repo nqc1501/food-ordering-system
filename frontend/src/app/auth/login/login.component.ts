@@ -28,7 +28,7 @@ export class LoginComponent {
     console.log(this.loginForm.value);
     this.service.login(
         this.loginForm.get(['email'])!.value,
-        this.loginForm.get('password')!.value
+        this.loginForm.get(['password'])!.value
     ).subscribe((response) => {
       console.log(response);
     })
