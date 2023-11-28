@@ -1,0 +1,33 @@
+.container {
+    background: #fff;
+    background-clip: border-box;
+    border: 2px solid #ccc;
+    border-radius: .25rem;
+    width: 600px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    height: 76vh;
+    padding: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+label {
+    font-size: 20px;
+}
+
+input {
+    width: 300px;
+    height: 40px;
+    font-size: 20px;
+    padding: 5px
+}
