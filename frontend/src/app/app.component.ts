@@ -12,7 +12,16 @@ export class AppComponent {
 
   isAdminLoggedIn: boolean;
   isUserLoggedIn: boolean;
-  public totalItems: number = 0;
+  totalItems: number = 0;
+  pageTitle: string;
+  searchBox: boolean;
+  showCart: boolean;
+
+  private titleMappings: { [key: string]: string } = {
+    'cart': ' | Giỏ hàng',
+    'account': ' | Thông tin tài khoản',
+    'payment': ' | Thanh toán'
+  }
 
   constructor(
       private router: Router,
@@ -24,7 +33,11 @@ export class AppComponent {
     this.updateUserLoggedStatus();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        const currentUrl = this.router.url;
         this.updateUserLoggedStatus();
+        this.updateTitle();
+        this.searchBox = currentUrl.includes('account') || currentUrl.includes('cart') || currentUrl.includes('payment');
+        this.showCart = !currentUrl.includes('account') && !currentUrl.includes('payment');
       }
     });
     this.getTotalItems();
@@ -47,6 +60,12 @@ export class AppComponent {
         this.cdr.detectChanges();
       }
     });
+  }
+
+  updateTitle() {
+    const currentUrl = this.router.url;
+    const matchingKeyword = Object.keys(this.titleMappings).find(keyword => currentUrl.includes(keyword));
+    this.pageTitle = matchingKeyword ? this.titleMappings[matchingKeyword] : '';
   }
 
   toDashboard() {

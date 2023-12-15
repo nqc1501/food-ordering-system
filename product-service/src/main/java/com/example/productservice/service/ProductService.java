@@ -1,8 +1,7 @@
 package com.example.productservice.service;
 
 import com.example.productservice.dto.ProductDto;
-import com.example.productservice.dto.req.ProductRequest;
-import com.example.productservice.model.Product;
+import com.example.productservice.dto.req.QuantityRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,17 +9,19 @@ import java.util.List;
 @Service
 public interface ProductService {
 
-    List<Product> getAllProducts();
+    List<ProductDto> getAllProducts();
 
     ProductDto createProduct(ProductDto productDto);
 
-    Product getProductById(Long id);
+    ProductDto getProductById(Long id);
 
-    void deleteProduct(Product product);
+    void deleteProduct(ProductDto productDto);
 
-    ProductDto updateProduct(ProductDto productDto);
+    ProductDto getProductByProCode(String productCode);
 
-    Product getProductByProCode(String productCode);
+    void updateProduct(ProductDto productDto);
 
-    void saveProduct(Product product);
+    List<ProductDto> getProductByType(String type);
+
+    void updateQuantity(QuantityRequest request);
 }

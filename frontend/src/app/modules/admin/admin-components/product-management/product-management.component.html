@@ -9,8 +9,8 @@
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+                <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
             </ng-container>
 
             <!-- Progress Column -->
@@ -28,7 +28,14 @@
             <!-- Fruit Column -->
             <ng-container matColumnDef="image">
                 <th mat-header-cell *matHeaderCellDef> Hình ảnh </th>
-                <td mat-cell *matCellDef="let row"> Độ lớn = {{row.image.length}} </td>
+                <td mat-cell *matCellDef="let row">
+                  <img src="data:image/jpeg;base64,{{row.image}}" style="width: 40px; height: 40px;">
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Loại </th>
+              <td mat-cell *matCellDef="let row"> {{row.type === 'food' ? 'Đồ ăn' : 'Đồ uống'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="price">
@@ -53,7 +60,7 @@
                     <button mat-icon-button color="primary" (click)="openEditForm(row)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" (click)="deleteProduct(row.id)">
+                    <button mat-icon-button color="warn" (click)="deleteProduct(row.productCode)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>

@@ -1,20 +1,13 @@
 package com.example.productservice.controller;
 
 import com.example.productservice.dto.ProductDto;
-import com.example.productservice.dto.req.ProductRequest;
+import com.example.productservice.dto.req.QuantityRequest;
 import com.example.productservice.model.Product;
 import com.example.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.List;
-import java.util.zip.DataFormatException;
-import java.util.zip.Deflater;
-import java.util.zip.Inflater;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -36,23 +29,35 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
+    @GetMapping("/get-product/{code}")
+    public ResponseEntity<?> getProductByProductCode(@PathVariable String code) {
+        return ResponseEntity.ok(productService.getProductByProCode(code));
+    }
+
+    @GetMapping("/get-product-by-type/{type}")
+    public ResponseEntity<?> getProductByType(@PathVariable String type) {
+        return ResponseEntity.ok(productService.getProductByType(type));
+    }
+
     @PutMapping("/put-product")
     public ResponseEntity<?> updateProduct(@ModelAttribute ProductDto productDto) {
-        Product product = productService.getProductByProCode(productDto.getProductCode());
-        if (product == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Can't find this product.");
-        }
-        productService.saveProduct(product);
+        productService.updateProduct(productDto);
         return ResponseEntity.ok("");
     }
 
-    @DeleteMapping("/delete-product/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
-        Product product = productService.getProductById(id);
-        if (product == null) {
+    @PutMapping("/update-quantity")
+    public ResponseEntity<?> updateQuantity(@RequestBody QuantityRequest request) {
+        productService.updateQuantity(request);
+        return ResponseEntity.ok("ok");
+    }
+
+    @DeleteMapping("/delete-product/{code}")
+    public ResponseEntity<?> deleteProduct(@PathVariable String code) {
+        ProductDto productDto = productService.getProductByProCode(code);
+        if (productDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Can't find this product.");
         }
-        productService.deleteProduct(product);
+        productService.deleteProduct(productDto);
         return ResponseEntity.ok("");
     }
 

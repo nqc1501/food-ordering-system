@@ -28,7 +28,7 @@ export class StorageService {
       listItems = [];
       listItems.push(item);
     } else {
-      if (!listItems.some(existingItem => existingItem.id === item.id)) {
+      if (!listItems.some(existingItem => existingItem.productCode === item.productCode)) {
         listItems.push(item);
       }
     }
@@ -51,6 +51,7 @@ export class StorageService {
     window.localStorage.setItem(ORDER_ITEMS, JSON.stringify([]));
   }
 
+  //
   public getUserID() {
     return JSON.parse(localStorage.getItem(USER)).userID;
   }

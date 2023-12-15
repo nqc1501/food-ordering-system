@@ -26,15 +26,17 @@ export class AddEditProductComponent {
         name: ['', Validators.required],
         productCode: ['', Validators.required],
         image: ['', Validators.required],
+        type: ['', Validators.required],
         price: ['', Validators.required],
         quantity: ['', Validators.required],
-        description: ['']
+        description: ['', Validators.required]
     });
   }
 
   ngOnInit() {
     this.validateForm.patchValue(this.data);
     if (this.data) {
+      this.imageData = this.data.image;
       this.imageUrl = 'data:image/jpeg;base64,' + this.data.image;
     } else {
       this.imageUrl = null;
@@ -47,12 +49,12 @@ export class AddEditProductComponent {
       fd.append('name', this.validateForm.value.name);
       fd.append('productCode', this.validateForm.value.productCode);
       fd.append('image', this.imageData);
+      fd.append('type', this.validateForm.value.type);
       fd.append('price', this.validateForm.value.price);
       fd.append('quantity', this.validateForm.value.quantity);
       fd.append('description', this.validateForm.value.description);
 
       if (this.data) {
-        console.log(fd);
         this.service.editProduct(fd).subscribe({
             next: (val) => {
               this.snackbar.open("Sửa thông tin mặt hàng thành công.", "OK", { duration: 5000 });

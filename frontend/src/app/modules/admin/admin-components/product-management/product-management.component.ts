@@ -19,6 +19,7 @@ export class ProductManagementComponent {
     'name',
     'productCode',
     'image',
+    'type',
     'price',
     'quantity',
     'description',
@@ -81,10 +82,10 @@ export class ProductManagementComponent {
     });
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(productCode: string) {
     const result = window.confirm("Bạn có mốn xóa món ăn này không?");
     if (result) {
-      this.service.deleteProduct(id).subscribe({
+      this.service.deleteProduct(productCode).subscribe({
         next: (res) => {
           this.getProductList();
           this.snackbar.open("Món ăn đã được xóa", "OK", { duration: 5000 });

@@ -14,7 +14,7 @@ import {PostUserComponent} from "../post-user/post-user.component";
 })
 export class UserManagementComponent {
 
-  displayedColumns: string[] = ['name', 'tel', 'address', 'email', 'action'];
+  displayedColumns: string[] = ['no', 'name', 'tel', 'address', 'email', 'action'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

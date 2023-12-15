@@ -1,5 +1,6 @@
 package com.example.orderservice.service.impl;
 
+import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.dto.OrderItemDto;
 import com.example.orderservice.dto.req.OrderRequest;
 import com.example.orderservice.model.Order;
@@ -28,38 +29,40 @@ public class OrderServiceImpl implements OrderService {
                 .map(this::mapToOrderItem)
                 .toList();
         order.setOrderItemList(orderItemList);
+        order.setUserId(orderRequest.getUserId());
         orderRepository.save(order);
+    }
+
+    @Override
+    public List<OrderDto> getAllOrder() {
+        List<Order> orderList = orderRepository.findAll();
+        return orderList.stream().map(this::mapToOrderDto).toList();
     }
 
     private OrderItem mapToOrderItem(OrderItemDto orderItemDto) {
         return OrderItem.builder()
-                .name(orderItemDto.getName())
+                .productCode(orderItemDto.getProductCode())
                 .price(orderItemDto.getPrice())
                 .quantity(orderItemDto.getQuantity())
                 .build();
     }
 
-    @Override
-    public List<OrderRequest> getAllOrder() {
-        List<Order> orderList = orderRepository.findAll();
-        return orderList.stream().map(this::mapToOrderRequest).toList();
-    }
-
-    private OrderRequest mapToOrderRequest(Order order) {
+    private OrderDto mapToOrderDto(Order order) {
         List<OrderItemDto> orderItemDtoList = order.getOrderItemList()
                 .stream()
                 .map(this::mapToOrderItemDto)
                 .toList();
         
-        return OrderRequest.builder()
+        return OrderDto.builder()
                 .orderNumber(order.getOrderNumber())
                 .orderItemDtoList(orderItemDtoList)
+                .userId(order.getUserId())
                 .build();
     }
 
     private OrderItemDto mapToOrderItemDto(OrderItem orderItem) {
         return OrderItemDto.builder()
-                .name(orderItem.getName())
+                .productCode(orderItem.getProductCode())
                 .price(orderItem.getPrice())
                 .quantity(orderItem.getQuantity())
                 .build();

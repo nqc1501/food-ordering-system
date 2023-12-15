@@ -35,7 +35,6 @@ export class LoginComponent {
         this.loginForm.get(['email'])!.value,
         this.loginForm.get(['password'])!.value
     ).subscribe((response) => {
-      console.log(response);
       if (StorageService.isAdminLoggedIn()) {
         this.router.navigateByUrl("admin/dashboard");
       } else if (StorageService.isUserLoggedIn()) {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
-import {UserService} from "../../user-services/user.service";
+import { UserService } from "../../user-services/user.service";
 
 @Component({
   selector: 'app-cart',
@@ -48,4 +48,5 @@ export class CartComponent {
   emptyCart() {
     this.service.removeAllCart();
   }
+
 }

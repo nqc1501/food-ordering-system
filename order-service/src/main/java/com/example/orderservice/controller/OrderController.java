@@ -1,7 +1,6 @@
 package com.example.orderservice.controller;
 
 import com.example.orderservice.dto.req.OrderRequest;
-import com.example.orderservice.model.Order;
 import com.example.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +13,13 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @PostMapping
+    @PostMapping("/post-order")
     public ResponseEntity<String> createOrder(@RequestBody OrderRequest orderRequest) {
         orderService.createOrder(orderRequest);
-        return ResponseEntity.ok("Place Order Completed!");
+        return ResponseEntity.ok("");
     }
 
-    @GetMapping
+    @GetMapping("/get-orders")
     public ResponseEntity<?> getAllOrder() {
         return ResponseEntity.ok(orderService.getAllOrder());
     }

@@ -20,7 +20,9 @@ import { AddEditProductComponent } from './admin-components/add-edit-product/add
 import { ProductManagementComponent } from './admin-components/product-management/product-management.component';
 import { OrderManagementComponent } from './admin-components/order-management/order-management.component';
 import { PaymentManagementComponent } from './admin-components/payment-management/payment-management.component';
-import { AdminAccountComponent } from './admin-components/admin-account/admin-account.component';
+import { AccountComponent } from './admin-components/account/account.component';
+import { MatSelectModule } from "@angular/material/select";
+import { OrderDetailsComponent } from './admin-components/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AdminAccountComponent } from './admin-components/admin-account/admin-ac
     ProductManagementComponent,
     OrderManagementComponent,
     PaymentManagementComponent,
-    AdminAccountComponent,
+    AccountComponent,
+    OrderDetailsComponent,
   ],
     imports: [
         CommonModule,
@@ -48,7 +51,8 @@ import { AdminAccountComponent } from './admin-components/admin-account/admin-ac
         MatSortModule,
         MatPaginatorModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSelectModule
     ]
 })
 export class AdminModule { }

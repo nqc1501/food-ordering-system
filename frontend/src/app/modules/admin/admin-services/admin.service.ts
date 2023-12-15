@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 
 const USER_URL = ['http://localhost:9001/'];
 const PRODUCT_URL = ['http://localhost:9002/'];
+const ORDER_URL = ['http://localhost:9003/'];
 
 
 @Injectable({
@@ -61,10 +62,17 @@ export class AdminService {
     });
   }
 
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete<[]>(PRODUCT_URL + `api/v1/product/delete-product/${id}`, {
+  deleteProduct(code: string): Observable<any> {
+    return this.http.delete<[]>(PRODUCT_URL + `api/v1/product/delete-product/${code}`, {
       headers: this.createAuthorizationHeader()
     });
+  }
+
+  // order processing
+  getOrderList() {
+    return this.http.get<[]>(ORDER_URL + 'api/v1/order/get-orders', {
+      headers: this.createAuthorizationHeader()
+    })
   }
 
   // authenticate

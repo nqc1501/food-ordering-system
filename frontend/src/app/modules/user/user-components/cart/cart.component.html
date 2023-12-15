@@ -37,7 +37,7 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Thao tác </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="warn" (click)="removeItem(element.id)">
+          <button mat-icon-button color="warn" (click)="removeItem(element.productCode)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -48,8 +48,8 @@
     </table>
   </div>
   <div style="display: flex; justify-content: right; margin: 20px; font-size: 20px">
-    <button mat-raised-button color="warn" style="width: 150px;" (click)="emptyCart()">Xóa hết</button>
-    <button mat-raised-button color="primary" style="margin-left: 20px; width: 150px;" routerLink="/user/payment">Thanh toán</button>
+    <button mat-raised-button color="warn" style="width: 150px;" (click)="emptyCart()"> Xóa hết </button>
+    <button mat-raised-button color="primary" style="margin-left: 20px; width: 150px;" routerLink="/user/payment"> Mua hàng </button>
     <span style="margin-left: 20px; margin-top: 8px;">Tổng tiền: {{grandTotal | currency:'VND'}}</span>
   </div>
 </div>

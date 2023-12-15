@@ -1,7 +1,7 @@
 package com.example.productservice.service.impl;
 
 import com.example.productservice.dto.ProductDto;
-import com.example.productservice.dto.req.ProductRequest;
+import com.example.productservice.dto.req.QuantityRequest;
 import com.example.productservice.model.Product;
 import com.example.productservice.repository.ProductRepository;
 import com.example.productservice.service.ProductService;
@@ -18,8 +18,8 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDto> getAllProducts() {
+        return productRepository.findAll().stream().map(this::mapToProductDto).toList();
     }
 
     @Override
@@ -29,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
                     .name(productDto.getName())
                     .productCode(productDto.getProductCode())
                     .image(productDto.getImage())
+                    .type(productDto.getType())
                     .price(productDto.getPrice())
                     .quantity(productDto.getQuantity())
                     .description(productDto.getDescription())
@@ -39,33 +40,47 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long id) {
-        return productRepository.findById(id).orElseThrow();
+    public ProductDto getProductById(Long id) {
+        Optional<Product> optional = productRepository.findById(id);
+        return optional.map(this::mapToProductDto).orElse(null);
     }
 
     @Override
-    public void deleteProduct(Product product) {;
+    public void deleteProduct(ProductDto productDto) {
+        Product product = productRepository.findByProductCode(productDto.getProductCode()).orElseThrow();
         productRepository.delete(product);
     }
 
     @Override
-    public ProductDto updateProduct(ProductDto productDto) {
+    public ProductDto getProductByProCode(String productCode) {
+        Optional<Product> optional = productRepository.findByProductCode(productCode);
+        return optional.map(this::mapToProductDto).orElse(null);
+    }
+
+    @Override
+    public void updateProduct(ProductDto productDto) {
         Product product = productRepository.findByProductCode(productDto.getProductCode()).orElseThrow();
         product.setName(productDto.getName());
         product.setImage(productDto.getImage());
+        product.setType(productDto.getType());
         product.setPrice(productDto.getPrice());
-        product.setQuantity(product.getQuantity());
-        product.setDescription(product.getDescription());
-        return mapToProductDto(productRepository.save(product));
+        product.setQuantity(productDto.getQuantity());
+        product.setDescription(productDto.getDescription());
+        productRepository.save(product);
     }
 
     @Override
-    public Product getProductByProCode(String productCode) {
-        return productRepository.findByProductCode(productCode).orElseThrow();
+    public List<ProductDto> getProductByType(String type) {
+        return productRepository.findAllByType(type)
+                .stream()
+                .map(this::mapToProductDto)
+                .toList();
     }
 
     @Override
-    public void saveProduct(Product product) {
+    public void updateQuantity(QuantityRequest request) {
+        Product product = productRepository.findByProductCode(request.getProductCode()).orElseThrow();
+        product.setQuantity(request.getQuantity());
         productRepository.save(product);
     }
 
@@ -74,6 +89,7 @@ public class ProductServiceImpl implements ProductService {
                 .name(product.getName())
                 .productCode(product.getProductCode())
                 .image(product.getImage())
+                .type(product.getType())
                 .price(product.getPrice())
                 .quantity(product.getQuantity())
                 .description(product.getDescription())

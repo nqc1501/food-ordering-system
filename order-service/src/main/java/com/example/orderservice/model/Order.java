@@ -23,4 +23,5 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private List<OrderItem> orderItemList;
+    private Long userId;
 }

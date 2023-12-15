@@ -47,18 +47,33 @@ export class AccountComponent {
         })
     }
 
-    onSubmit() {
-        if (this.validateForm.valid) {
-            this.service.updateUserInfo(this.validateForm.value).subscribe({
-                next: (res) => {
-                    console.log(res);
-                    this.snackbar.open("Bạn đã sửa thông tin thành công.", "OK", { duration: 5000 });
-                    this.getUserInfo();
-                },
-                error: (err) => {
+    saveDeliveryInfo() {
+      const request = {
+        name: this.validateForm.value.name,
+        tel: this.validateForm.value.tel,
+        address: this.validateForm.value.address,
+        email: this.validateForm.value.email
+      };
 
-                }
-            })
+      this.service.updateDelivery(request).subscribe({
+        next: (res) => {
+          this.snackbar.open("Thay đổi thông tin thành công", "OK", { duration: 5000 });
+          this.getUserInfo();
         }
+      });
+    }
+
+    savePassword() {
+      const request = {
+        email: this.validateForm.value.email,
+        password: this.validateForm.value.password
+      }
+
+      this.service.updatePassword(request).subscribe({
+        next: (res) => {
+          this.getUserInfo();
+          this.snackbar.open("Thay đổi thông tin thành công", "OK", { duration: 5000 });
+        }
+      })
     }
 }

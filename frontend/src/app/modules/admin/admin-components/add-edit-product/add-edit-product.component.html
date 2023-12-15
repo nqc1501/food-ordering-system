@@ -1,5 +1,5 @@
 <div mat-dialog-title>
-  <h1>Thêm món ăn</h1>
+  <h1>{{ data  ? 'Sửa thôn tin món ăn' : 'Thêm món ăn'}}</h1>
 </div>
 <form [formGroup]="validateForm" (ngSubmit)="onFormSubmit()">
   <div mat-dialog-content>
@@ -36,15 +36,26 @@
 
         <div class="row">
           <mat-form-field appearance="outline">
+            <mat-label>Loại</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="food">Đồ ăn</mat-option>
+              <mat-option value="drinks">Đồ uống</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline">
             <mat-label>Mô tả</mat-label>
             <textarea matInput type="text" placeholder="Nhập mô tả" formControlName="description"></textarea>
           </mat-form-field>
         </div>
+
       </div>
     </div>
   </div>
   <div mat-dialog-actions class="action">
-    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-    <button mat-raised-button color="primary" type="submit">{{ data ? 'Update' : 'Save'}}</button>
+    <button mat-raised-button type="button" [mat-dialog-close]="false" color="accent">Hủy</button>
+    <button mat-raised-button color="primary" type="submit">Lưu</button>
   </div>
 </form>
