@@ -1,0 +1,30 @@
+<div class="card-top">
+  <button style="margin-left: 22px; width: 100px; margin-bottom: 20px;" (click)="openForm('all')">
+    <mat-icon>food_bank</mat-icon>
+    <h6 style="font-size: 12px"> Toàn bộ </h6>
+  </button>
+  <button style="margin-left: 22px; width: 100px; margin-bottom: 20px;" (click)="openForm('food')">
+    <mat-icon>fastfood</mat-icon>
+    <h6 style="font-size: 12px"> Đồ ăn </h6>
+  </button>
+  <button style="margin-left: 22px; width: 100px; margin-bottom: 20px;" (click)="openForm('drinks')">
+    <mat-icon>emoji_food_beverage</mat-icon>
+    <h6 style="font-size: 12px"> Đồ uống </h6>
+  </button>
+</div>
+
+<div class="table-container">
+  <div class="row">
+    <ng-container *ngFor="let item of productList">
+      <mat-card class="card">
+        <img mat-card-image src="data:image/jpeg;base64,{{ item.image }}" [routerLink]="['/user/product', item.productCode]" style="cursor: pointer;">
+        <mat-card-content>
+          <h2 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100ch">{{ item.name }}</h2>
+          <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100ch">{{ item.description ? item.description : 'Không có mô tả' }}</p>
+          <p style="margin-bottom: 20px;"><strong>Giá: </strong>{{ item.price | currency:'VND'}}</p>
+        </mat-card-content>
+        <button mat-raised-button color="primary" (click)="addToCart(item)">Thêm vào giỏ hàng</button>
+      </mat-card>
+    </ng-container>
+  </div>
+</div>

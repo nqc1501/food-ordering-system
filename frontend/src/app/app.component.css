@@ -1,0 +1,44 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.button-form {
+  color: white;
+  text-transform: none;
+  margin-left: 8px;
+}
+
+button.active {
+  font-weight: 600;
+  color: dimgray;
+}
+
+button.active {
+  font-weight: 600;
+  color: darkgray;
+}
+
+::ng-deep .menu-without-scroll {
+  overflow: hidden !important;
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 600px;
+  height: 30px;
+  margin-left: 50px;
+  padding-left: 10px;
+}

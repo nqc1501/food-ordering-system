@@ -1,0 +1,44 @@
+<div *ngIf="!isAdminLoggedIn && !isUserLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand">Food Ordering</span>
+  </mat-toolbar>
+</div>
+<div *ngIf="isAdminLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand">FOOD ORDERING</span>
+    <span class="spacer"></span>
+    <button mat-button class="button-form" routerLink="/admin/user-management" routerLinkActive="active">KHÁCH HÀNG</button>
+    <button mat-button class="button-form" routerLink="/admin/product-management" routerLinkActive="active">MÓN ĂN</button>
+    <button mat-button class="button-form" routerLink="/admin/order-management" routerLinkActive="active">ĐƠN HÀNG</button>
+    <button mat-button class="button-form" routerLink="/admin/payment-management" routerLinkActive="active">THANH TOÁN</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="menu-without-scroll">
+      <button mat-menu-item (click)="logout()">Đăng xuất</button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
+<div *ngIf="isUserLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand" (click)="toDashboard()" style="cursor: pointer">FOOD ORDERING</span>
+    <span class="navbar-brand">{{ pageTitle }}</span>
+    <div class="form-group" *ngIf="!searchBox">
+      <input matInput type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm...">
+    </div>
+    <span class="spacer"></span>
+    <button mat-icon-button routerLink="/user/cart" *ngIf="showCart">
+      <mat-icon>shopping_cart</mat-icon>
+      <span style="font-size: 10px;">{{ totalItems }}</span>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" style="margin-left: 8px;">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="menu-without-scroll" style="color: black">
+      <button mat-menu-item routerLink="/user/account">Thông tin tài khoản</button>
+      <button mat-menu-item routerLink="/user/ordering">Đơn mua</button>
+      <button mat-menu-item (click)="logout()">Đăng xuất</button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
+<router-outlet></router-outlet>

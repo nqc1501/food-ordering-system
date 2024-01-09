@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="card">
+        <form [formGroup]="validateForm">
+            <h1>Thông tin cá nhân</h1>
+            <div class="column">
+                <div style="display: flex; gap: 60px; align-items: center; margin-top: 8px; margin-bottom: 30px;">
+                    <label>Họ và tên: </label>
+                    <input type="text" formControlName="name">
+                </div>
+
+                <div style="display: flex; gap: 27px; align-items: center; margin-bottom: 30px;">
+                    <label>Số điện thoại: </label>
+                    <input type="text" formControlName="tel">
+                </div>
+
+                <div style="display: flex; gap: 85px; align-items: center; margin-bottom: 30px;">
+                    <label>Địa chỉ: </label>
+                    <input type="text" id="address" formControlName="address">
+                </div>
+
+                <button mat-raised-button type="submit" color="primary" style="width: 100px;" (click)="saveDeliveryInfo()">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h1>Thông tin tài khoản</h1>
+    <form [formGroup]="validateForm">
+      <div class="column">
+        <div style="display: flex; gap: 96px; align-items: center; margin-bottom: 30px;">
+          <label>Email: </label>
+          <input type="email" id="email" formControlName="email" readonly>
+        </div>
+
+        <div style="display: flex; gap: 62px; align-items: center; margin-bottom: 30px;">
+          <label>Mật khẩu: </label>
+          <input type="password" id="password" formControlName="password">
+        </div>
+
+        <button mat-raised-button type="submit" color="primary" style="width: 200px;" (click)="savePassword()">Thay đổi mật khẩu</button>
+      </div>
+    </form>
+  </div>
+</div>

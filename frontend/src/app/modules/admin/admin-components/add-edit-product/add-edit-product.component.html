@@ -1,0 +1,61 @@
+<div mat-dialog-title>
+  <h1>{{ data  ? 'Sửa thôn tin món ăn' : 'Thêm món ăn'}}</h1>
+</div>
+<form [formGroup]="validateForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="column">
+        <div class="image-container">
+          <input type="file" id="fileInput" (change)="handleFileInput($event)" accept=".jpg" style="display:none" formControlName="image">
+          <img *ngIf="imageUrl" [src]="imageUrl" alt="Chọn ảnh">
+        </div>
+        <button mat-raised-button type="button" color="primary" (click)="openFileExplorer()">Chọn ảnh</button>
+      </div>
+      <div class="column">
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Tên món ăn</mat-label>
+            <input matInput type="text" placeholder="Nhập tên món ăn" formControlName="name"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Mã món ăn</mat-label>
+            <input matInput type="text" placeholder="Nhập mã món ăn" formControlName="productCode" [readonly]="data"/>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Giá món ăn</mat-label>
+            <input matInput type="text" placeholder="Nhập giá" formControlName="price"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Số lượng</mat-label>
+            <input matInput type="text" placeholder="Nhập số lượng" formControlName="quantity"/>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Loại</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="food">Đồ ăn</mat-option>
+              <mat-option value="drinks">Đồ uống</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Mô tả</mat-label>
+            <textarea matInput type="text" placeholder="Nhập mô tả" formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false" color="accent">Hủy</button>
+    <button mat-raised-button color="primary" type="submit">Lưu</button>
+  </div>
+</form>

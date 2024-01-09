@@ -1,0 +1,40 @@
+<div mat-dialog-title>
+  <h1>{{ data ? 'Sửa thông tin' : 'Thêm tài khoản'}}</h1>
+</div>
+<form [formGroup]="validateForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Họ tên</mat-label>
+        <input matInput type="text" placeholder="Nhập họ tên" formControlName="name"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Số điện thoại</mat-label>
+        <input matInput type="text" placeholder="Nhập số điện thoại" formControlName="tel"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Địa chỉ</mat-label>
+        <textarea matInput type="text" placeholder="Nhập địa chỉ" formControlName="address"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Nhập email" formControlName="email" [readonly]="data"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Mật khẩu</mat-label>
+        <input matInput type="password" placeholder="Nhập mật khẩu" formControlName="password"/>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false" color="accent">Huỷ</button>
+    <button mat-raised-button color="primary" type="submit">Lưu</button>
+  </div>
+</form>

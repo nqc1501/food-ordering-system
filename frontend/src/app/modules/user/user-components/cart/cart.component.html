@@ -1,0 +1,68 @@
+<div class="container" *ngIf="haveProduct">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Tên sản phẩm </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Hình ảnh </th>
+        <td mat-cell *matCellDef="let element">
+          <img src="data:image/jpeg;base64,{{element.image}}" alt="Image" style="max-width: 150px; max-height: 150px;">
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Giá </th>
+        <td mat-cell *matCellDef="let element"> {{element.price | currency:'VND'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Số lượng </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> Số tiền </th>
+        <td mat-cell *matCellDef="let element"> {{element.total | currency:'VND'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Thao tác </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="warn" (click)="removeItem(element.productCode)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div style="display: flex; justify-content: right; margin: 20px; font-size: 20px">
+    <button mat-raised-button color="warn" style="width: 150px;" (click)="emptyCart()"> Xóa hết </button>
+    <button mat-raised-button color="primary" style="margin-left: 20px; width: 150px;" routerLink="/user/payment"> Mua hàng </button>
+    <span style="margin-left: 20px; margin-top: 8px;">Tổng tiền: {{grandTotal | currency:'VND'}}</span>
+  </div>
+</div>
+
+<ng-container *ngIf="!haveProduct">
+  <div class="container">
+    <div class="card">
+    </div>
+    <div class="center">
+      <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/9bdd8040b334d31946f49e36beaf32db.png" alt=""
+      style="max-width: 100px; max-height: 100px;">
+      <h4>Giỏ hàng của bạn còn trống</h4>
+      <button mat-raised-button color="primary" routerLink="/user/dashboard">Mua ngay</button>
+    </div>
+  </div>
+</ng-container>

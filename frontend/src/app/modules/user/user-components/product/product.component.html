@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row" *ngIf="product">
+    <div class="image-card">
+      <img src="data:image/jpeg;base64,{{ product.image }}">
+    </div>
+    <div class="column">
+      <h1 style="font-size: 40px">{{product.name}}</h1>
+      <span style="font-size: 20px;">{{product.price | currency:'VND'}}</span>
+      <span style="max-width: 50ch; text-align: justify; margin-top: 25px; font-size: 15px;">{{product.description}}</span>
+      <div class="row-quantity">
+        <div class="minus-plus">
+          <button mat-button class="operator" (click)="decreaseQuantity()">-</button>
+          <input type="text" [(ngModel)]="quantity" (ngModelChange)="checkLimit()" class="quantity-input">
+          <button mat-button class="operator" (click)="increaseQuantity()">+</button>
+        </div>
+        <span style="display: flex; flex-direction: row; align-items: center">{{maxQuantity}} sản phẩm có sẵn</span>
+      </div>
+      <div class="row-button">
+        <button mat-raised-button style="border: 1px solid #2196F3" (click)="addToCart(product)">Thêm vào giỏ hàng</button>
+        <button mat-raised-button color="primary" (click)="toCart(product)">Mua Ngay</button>
+      </div>
+    </div>
+  </div>
+</div>

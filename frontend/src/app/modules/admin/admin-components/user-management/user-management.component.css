@@ -1,0 +1,16 @@
+.main-body {
+  padding-top: 20px;
+  margin: 0 auto;
+  max-width: 1348px;
+
+  & mat-form-field {
+    width: 50%;
+    margin-left: 15px;
+  }
+}
+
+.custom {
+  position: fixed;
+  bottom: 60px;
+  left: 20px;
+}

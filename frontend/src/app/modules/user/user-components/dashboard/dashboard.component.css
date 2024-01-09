@@ -1,0 +1,44 @@
+.card-top {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  word-wrap: break-word;
+  background: #fff;
+  background-clip: border-box;
+  border-bottom: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.card {
+  padding: 20px;
+  margin-top: 50px;
+  margin-left: 22px;
+  max-width: 250px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+mat-card {
+  border: 1px solid #ccc;
+}
+
+mat-card img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
+  transition: 0.3s ease-in-out;
+  border-radius: 3px 3px 3px 3px;
+}
+
+mat-card img:hover {
+  transition: 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+
+mat-card-content {
+  margin: -16px;
+  margin-bottom: 8px;
+}
